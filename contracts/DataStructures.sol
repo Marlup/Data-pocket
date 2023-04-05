@@ -8,14 +8,14 @@ pragma solidity >=0.7.0 <0.9.0;
  */
 contract DataStructures {
     struct Field {
-        bytes32 key;
-        bytes32 value;
+        bytes key;
+        bytes value;
         uint updateDate;
         bool active;
     }
     struct Request {
         address requester;
-        bytes32 key;
+        bytes key;
         uint requestDate;
         bool accepted;
     }

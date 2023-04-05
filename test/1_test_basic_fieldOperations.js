@@ -94,4 +94,5 @@ contract("FieldOperations", (accounts) => {
       assert.equal(web3.utils.toUtf8(field[0].value), web3.utils.toUtf8(value), "Field value should match");
     });
   });
-});
+}
+);

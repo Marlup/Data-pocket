@@ -11,7 +11,7 @@ contract FieldOperations is DataStructures {
     // ++ States ++
     address private owner;
     // Maps atomic-key to field structures (atomicKey => Field)
-    mapping(address => Field[]) private _fields;
+    mapping(address => Field[]) private _addressFields;
 
     // ++ Events ++
     event requestSent(address indexed requester, address indexed accepter, uint indexed date);
@@ -25,7 +25,7 @@ contract FieldOperations is DataStructures {
         require(msg.sender == owner, "Caller is not owner");
         _;
     }
-
+    
     // ++ Getter functions ++ 
     /**
      * @notice Returns the address of the owner
@@ -39,58 +39,38 @@ contract FieldOperations is DataStructures {
      * @dev Use atomic-key to access
      */
     function getNumberFields() external view isOwner() returns(uint) {
-        return _fields[msg.sender].length;
+        return _addressFields[msg.sender].length;
     }
     /**
      * @notice Returns all fields
      * @dev 
      */
     function getFields() external view isOwner() returns(Field[] memory) {
-        return _fields[msg.sender];
+        return _addressFields[msg.sender];
     }
     /**
      * @notice Returns one field by index
      * @dev 
      */
     function getFieldByIndex(uint _index) external view isOwner() returns(Field memory) {
-        return _fields[msg.sender][_index];
+        return _addressFields[msg.sender][_index];
     }
-    /**
-     * @notice Returns key and value by index
-     * @dev 
-     */
-     /*
-    function getPairByIndex(uint _index) external view isOwner() returns(bytes32, bytes32) {
-        Field memory _field = _fields[msg.sender][_index];
-        return (_field.key, _field.value);
-    }
-    */
     /**
      * @notice Returns one field by key
      * @dev 
      */
-    function getFieldByKey(bytes32 _key) external view isOwner() returns(Field memory) {
+    function getFieldByKey(bytes memory _key) external view isOwner() returns(Field memory) {
         return _searchField(_key);
     }
-    /**
-     * @notice Returns key and value by key
-     * @dev 
-     */
-     /*
-    function getPairByKey(bytes32 _key) external view isOwner() returns(bytes32, bytes32) {
-        Field memory _field = _searchField(_key);
-        return (_field.key, _field.value);
-    }
-    */
     /**
      * @notice Returned field if input key is matched
      * @dev 
      */
-    function _searchField(bytes32 _key) private view isOwner() returns(Field memory) {
-        Field[] memory _field = _fields[msg.sender];
-        for (uint i = 0; i < _field.length; i++) {
-            if (_field[i].key == _key) {
-                return _field[i];
+    function _searchField(bytes memory _key) private view isOwner() returns(Field memory) {
+        Field[] memory _fields = _addressFields[msg.sender];
+        for (uint i = 0; i < _fields.length; i++) {
+            if (keccak256(_fields[i].key) == keccak256(_key)) {
+                return _fields[i];
             }
         }
         revert("Field was not found");
@@ -101,21 +81,21 @@ contract FieldOperations is DataStructures {
      * @dev Add one field and stores it in 'fields' state 
      * and 'userFieldCounts' adds up 1 for the user
      */
-    function addField(bytes32 _key, bytes32 _value) external isOwner() {
+    function addField(bytes calldata _key, bytes calldata _value) external isOwner() {
         Field memory _field;
         _field.key = _key;
         _field.value = _value;
         _field.updateDate = block.timestamp;
         _field.active = true;
         // Insert new Field struct
-        _fields[msg.sender].push(_field);
+        _addressFields[msg.sender].push(_field);
     }
     /**
      * @notice Modify both key and value
      * @dev 
      */
-    function modifyField(bytes32 _key, bytes32 _value, uint _index) external isOwner() {
-        Field storage _field = _fields[msg.sender][_index];
+    function modifyField(bytes calldata _key, bytes calldata _value, uint _index) external isOwner() {
+        Field storage _field = _addressFields[msg.sender][_index];
         _field.key = _key;
         _field.value = _value;
         _field.updateDate = block.timestamp;
@@ -124,8 +104,8 @@ contract FieldOperations is DataStructures {
      * @notice Modify only key of field
      * @dev 
      */
-    function modifyFieldKey(bytes32 _key, uint _index) external isOwner() {
-        Field storage _field = _fields[msg.sender][_index];
+    function modifyFieldKey(bytes calldata _key, uint _index) external isOwner() {
+        Field storage _field = _addressFields[msg.sender][_index];
         _field.key = _key;
         _field.updateDate = block.timestamp;
     }
@@ -133,8 +113,8 @@ contract FieldOperations is DataStructures {
      * @notice Modify only value of field
      * @dev 
      */
-    function modifyFieldValue(bytes32 _value, uint _index) external isOwner() {
-        Field storage _field = _fields[msg.sender][_index];
+    function modifyFieldValue(bytes calldata _value, uint _index) external isOwner() {
+        Field storage _field = _addressFields[msg.sender][_index];
         _field.value = _value;
         _field.updateDate = block.timestamp;
     }
@@ -143,7 +123,7 @@ contract FieldOperations is DataStructures {
      * @dev 
      */
     function toggleActiveField(uint _index) external isOwner() {
-        Field storage _field = _fields[msg.sender][_index];
+        Field storage _field = _addressFields[msg.sender][_index];
         _field.active = !_field.active;
     }
     // ++ Event functions ++
