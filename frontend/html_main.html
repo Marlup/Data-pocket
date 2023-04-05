@@ -43,6 +43,30 @@
     </style>
   </head>
   <body>
+    <table id="table-stored-fields" style="table-layout:fixed; width:1200px; margin: 20px">
+      <thead>
+        <tr>
+          <th style="width:80px;"></th>
+          <th style="width:100px;">Activation</th>
+          <th style="width:400px;">Key</th>
+          <th style="width:400px;">Value</th>
+        </tr>
+      </thead>
+      <tbody id="tbody-stored-fields">
+        <tr>
+          <td><button class="checker">Check</button></td>
+          <td id="data" class="toggle" data-active="true">True</td>
+          <td id="data" contenteditable="true">Provisional key</td>
+          <td id="data" contenteditable="true">Provisional value</td>
+        </tr>
+        <tr>
+          <td><button class="checker">Check</button></td>
+          <td id="data" class="toggle" data-active="true">True</td>
+          <td id="data" contenteditable="true">Provisional key</td>
+          <td id="data" contenteditable="true">Provisional value</td>
+        </tr>
+      </tbody>
+    </table>
     <table id="table-new-fields" style="table-layout:fixed; width:1200px; margin: 20px;">
       <thead>
         <tr>
@@ -55,124 +79,109 @@
       <tbody id="tbody-new-fields">
         <tr>
           <td><button class="checker">Check</button></td>
-          <td class="toggle" data-active="true">True</td>
-          <td contenteditable="true">Provisional key</td>
-          <td contenteditable="true">Provisional value</td>
+          <td id="data" class="toggle" data-active="true">True</td>
+          <td id="data" contenteditable="true">Provisional key</td>
+          <td id="data" contenteditable="true">Provisional value</td>
         </tr>
         <tr>
           <td><button class="checker">Check</button></td>
-          <td class="toggle" data-active="true">True</td>
-          <td contenteditable="true">Provisional key</td>
-          <td contenteditable="true">Provisional value</td>
+          <td id="data" class="toggle" data-active="true">True</td>
+          <td id="data"contenteditable="true">Provisional key</td>
+          <td id="data"contenteditable="true">Provisional value</td>
         </tr>
       </tbody>
     </table>
     <button id="add-row" style="position:absolute;left:40px">Add new field</button>
     <button id="delete-rows" style="position:absolute;left:190px">Delete checked fields</button>
-    <button id="store-rows" style="position:absolute;left:340px">Store checked fields</button>
-
-    <table id="table-stored-fields" style="table-layout:fixed; width:1200px; margin: 20px">
-      <thead>
-        <tr>
-          <th style="width:80px;"></th>
-          <th style="width:100px;">Activation</th>
-          <th style="width:400px;">Key</th>
-          <th style="width:400px;">Value</th>
-        </tr>
-      </thead>
-      <tbody id="tbody-new-fields">
-        <tr>
-          <td><button class="checker">Check</button></td>
-          <td class="toggle" data-active="true">True</td>
-          <td contenteditable="true">Provisional key</td>
-          <td contenteditable="true">Provisional value</td>
-        </tr>
-        <tr>
-          <td><button class="checker">Check</button></td>
-          <td class="toggle" data-active="true">True</td>
-          <td contenteditable="true">Provisional key</td>
-          <td contenteditable="true">Provisional value</td>
-        </tr>
-      </tbody>
-    </table>
+    <button id="store-rows" style="position:absolute;left:400px">Store checked fields</button>
 
     <script defer src="GetterCaller.js"></script>
     <script defer src="ModifierCaller.js"></script>
     <script defer src="RequestCaller.js"></script>
     <script>
-        const table = document.querySelector('table');
+        const tableStored = document.querySelector('table[id="table-stored-fields"]');
+        const tableNew = document.querySelector('table[id="table-new-fields"]');
         const addRowBtn = document.querySelector('#add-row');
         const deleteRowsBtn = document.querySelector('#delete-rows');
         const storeRowsBtn = document.querySelector('#store-rows');
-
+        
         function addRow() {
-            const row = document.createElement('tr');
-            row.innerHTML = `
+          const row = document.createElement('tr');
+          row.innerHTML = `
             <td><button class="checker">Check</button></td>
             <td class="toggle" data-active="true">True</td>
             <td contenteditable="true">Provisional key</td>
             <td contenteditable="true">Provisional Value</td>
             `;
-            table.querySelector('tbody').appendChild(row);
+            tableNew.querySelector('tbody[id="tbody-new-fields"]').appendChild(row);
         }
 
         function deleteRows() {
-            //const rows = table.querySelectorAll('tbody tr');
-            const rows = table.querySelectorAll('tbody[id="tbody-new-fields"] tr');
-            rows.forEach(row => {
+          //const rows = table.querySelectorAll('tbody tr');
+          const rows = document.querySelectorAll('tbody[id="tbody-stored-fields"]>tr, tbody[id="tbody-new-fields"]>tr');
+          rows.forEach(row => {
             const isChecked = row.querySelector('.checker').classList.contains('checked');
             if (isChecked) {
               row.remove();
             }
-            });
+          });
         }
 
-        function storeRows() {
-            const rows = table.querySelectorAll('tbody[id="table-read-fields"] tr');
-            rows.forEach(row => {
+        function storeRows(account) {
+          const rows = tableNew.querySelectorAll('tbody[id="table-new-fields"]>tr');
+          rows.forEach(row => {
             const isChecked = row.querySelector('.checker').classList.contains('checked');
             if (isChecked) {
-              callAddField(account, key, value)
-                row.remove();
+              const [activation, key, value] = row.querySelector('td[id="data"]');
+              callAddField(account, key, value);
             }
-            });
+          });
         }
 
         function toggleActivation(toggle) {
-            const isActive = toggle.dataset.active === 'true';
-            toggle.dataset.active = !isActive;
-            toggle.textContent = isActive ? 'False' : 'True';
+          const isActive = toggle.dataset.active === 'true';
+          toggle.dataset.active = !isActive;
+          toggle.textContent = isActive ? 'False' : 'True';
         }
 
         function checkRow(row, isChecked) {
-            if (isChecked) {
+          if (isChecked) {
             row.classList.add('checked-row');
-            } else {
+          } else {
             row.classList.remove('checked-row');
-            }
+          }
         }
         function handleToggleActivation(event) {
-            const toggle = event.target;
-            toggleActivation(toggle);
+          const toggle = event.target;
+          toggleActivation(toggle);
         }
 
         function handleCheckRow(event) {
-            const checker = event.target;
-            const row = checker.parentNode.parentNode;
-            const isChecked = checker.classList.toggle('checked');
-            checkRow(row, isChecked);
+          const checker = event.target;
+          const row = checker.parentNode.parentNode;
+          const isChecked = checker.classList.toggle('checked');
+          checkRow(row, isChecked);
         }
 
         addRowBtn.addEventListener('click', addRow);
         deleteRowsBtn.addEventListener('click', deleteRows);
+        storeRowsBtn.addEventListener('click', storeRows);
 
-        table.addEventListener('click', event => {
-            if (event.target.classList.contains('toggle')) {
+        tableStored.addEventListener('click', event => {
+          if (event.target.classList.contains('toggle')) {
             handleToggleActivation(event);
-            }
-            if (event.target.classList.contains('checker')) {
+          }
+          if (event.target.classList.contains('checker')) {
             handleCheckRow(event);
-            }
+          }
+        });
+        tableNew.addEventListener('click', event => {
+          if (event.target.classList.contains('toggle')) {
+            handleToggleActivation(event);
+          }
+          if (event.target.classList.contains('checker')) {
+            handleCheckRow(event);
+          }
         });
     </script>
     </body>
