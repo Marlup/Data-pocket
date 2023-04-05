@@ -1,5 +1,3 @@
-const FieldOperations = artifacts.require("FieldOperations");
-
 // Emit requests
 async function callSendRequest(requester, accepter) {
     const fieldOperations = await FieldOperations.deployed();

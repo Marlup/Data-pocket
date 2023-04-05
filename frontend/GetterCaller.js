@@ -1,12 +1,4 @@
 const NENCRYPTEDATTRIBUTES = 2;
-const Attribute = {
-	Key: "key",
-	Value: "value",
-	DateUpdate: "dateUpdate",
-	Active: "active"
-}
-
-fun
 
 const FieldOperations = artifacts.require("FieldOperations");
 
@@ -20,7 +12,7 @@ async function callGetNumberFields(account) {
     const nFields = await fieldOperations.getNumberFields({ from: account });
     return nFields;
 }
-async function callGetFields(account, fields) {
+async function callGetFields(account) {
     fieldOperations = await FieldOperations.deployed();
     const fields = await fieldOperations.getFields({ from: account });
     fieldsDecoded = [];

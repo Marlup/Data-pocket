@@ -1,8 +1,6 @@
 // dataEncoder() function courtesy of
 // https://github.com/pubkey/eth-crypto/blob/master/tutorials/encrypted-message.md
 
-const FieldOperations = artifacts.require("FieldOperations");
-
 // Insert data
 async function callAddField(account, key, value) {
     const fieldOperations = await FieldOperations.deployed();

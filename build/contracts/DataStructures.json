@@ -1,0 +1,329 @@
+{
+  "contractName": "DataStructures",
+  "abi": [],
+  "metadata": "{\"compiler\":{\"version\":\"0.8.17+commit.8df45f5f\"},\"language\":\"Solidity\",\"output\":{\"abi\":[],\"devdoc\":{\"custom:dev-run-script\":\"./scripts/deploy_with_ethers.ts\",\"details\":\"Custom data structures.\",\"kind\":\"dev\",\"methods\":{},\"title\":\"DataStructures\",\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"project:/contracts/DataStructures.sol\":\"DataStructures\"},\"evmVersion\":\"london\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"project:/contracts/DataStructures.sol\":{\"keccak256\":\"0x89895ae7ba7cb460506d0feb20e4d4a6e957c0080ab2250c076145bba814f59a\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://4d8810d1efe173ada852a8974a55608f98ceb896d4ec9c9aef112044e87b66de\",\"dweb:/ipfs/QmTx3WbU8UHuMywE7XyKvH7y3BuopQdpuf9p1YuYZx7RZC\"]}},\"version\":1}",
+  "bytecode": "0x6080604052348015600f57600080fd5b50603f80601d6000396000f3fe6080604052600080fdfea26469706673582212205568360c0b73bea1ce54d7859f6beaad4995e98591467a0c903a4b3fcaa1121764736f6c63430008110033",
+  "deployedBytecode": "0x6080604052600080fdfea26469706673582212205568360c0b73bea1ce54d7859f6beaad4995e98591467a0c903a4b3fcaa1121764736f6c63430008110033",
+  "immutableReferences": {},
+  "generatedSources": [],
+  "deployedGeneratedSources": [],
+  "sourceMap": "196:273:0:-:0;;;;;;;;;;;;;;;;;;;",
+  "deployedSourceMap": "196:273:0:-:0;;;;;",
+  "source": "// SPDX-License-Identifier: MIT\r\n\r\npragma solidity >=0.7.0 <0.9.0;\r\n/**\r\n * @title DataStructures\r\n * @dev Custom data structures.\r\n * @custom:dev-run-script ./scripts/deploy_with_ethers.ts\r\n */\r\ncontract DataStructures {\r\n    struct Field {\r\n        bytes key;\r\n        bytes value;\r\n        uint updateDate;\r\n        bool active;\r\n    }\r\n    struct Request {\r\n        address requester;\r\n        bytes key;\r\n        uint requestDate;\r\n        bool accepted;\r\n    }\r\n}\r\n",
+  "sourcePath": "C:\\Users\\marsu\\Programming projects\\Solidity and Dapps\\Data pocket\\Data-pocket\\contracts\\DataStructures.sol",
+  "ast": {
+    "absolutePath": "project:/contracts/DataStructures.sol",
+    "exportedSymbols": {
+      "DataStructures": [
+        21
+      ]
+    },
+    "id": 22,
+    "license": "MIT",
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 1,
+        "literals": [
+          "solidity",
+          ">=",
+          "0.7",
+          ".0",
+          "<",
+          "0.9",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "35:31:0"
+      },
+      {
+        "abstract": false,
+        "baseContracts": [],
+        "canonicalName": "DataStructures",
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": {
+          "id": 2,
+          "nodeType": "StructuredDocumentation",
+          "src": "68:126:0",
+          "text": " @title DataStructures\n @dev Custom data structures.\n @custom:dev-run-script ./scripts/deploy_with_ethers.ts"
+        },
+        "fullyImplemented": true,
+        "id": 21,
+        "linearizedBaseContracts": [
+          21
+        ],
+        "name": "DataStructures",
+        "nameLocation": "205:14:0",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "canonicalName": "DataStructures.Field",
+            "id": 11,
+            "members": [
+              {
+                "constant": false,
+                "id": 4,
+                "mutability": "mutable",
+                "name": "key",
+                "nameLocation": "257:3:0",
+                "nodeType": "VariableDeclaration",
+                "scope": 11,
+                "src": "251:9:0",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_bytes_storage_ptr",
+                  "typeString": "bytes"
+                },
+                "typeName": {
+                  "id": 3,
+                  "name": "bytes",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "251:5:0",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_storage_ptr",
+                    "typeString": "bytes"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 6,
+                "mutability": "mutable",
+                "name": "value",
+                "nameLocation": "277:5:0",
+                "nodeType": "VariableDeclaration",
+                "scope": 11,
+                "src": "271:11:0",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_bytes_storage_ptr",
+                  "typeString": "bytes"
+                },
+                "typeName": {
+                  "id": 5,
+                  "name": "bytes",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "271:5:0",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_storage_ptr",
+                    "typeString": "bytes"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 8,
+                "mutability": "mutable",
+                "name": "updateDate",
+                "nameLocation": "298:10:0",
+                "nodeType": "VariableDeclaration",
+                "scope": 11,
+                "src": "293:15:0",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 7,
+                  "name": "uint",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "293:4:0",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 10,
+                "mutability": "mutable",
+                "name": "active",
+                "nameLocation": "324:6:0",
+                "nodeType": "VariableDeclaration",
+                "scope": 11,
+                "src": "319:11:0",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_bool",
+                  "typeString": "bool"
+                },
+                "typeName": {
+                  "id": 9,
+                  "name": "bool",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "319:4:0",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "name": "Field",
+            "nameLocation": "234:5:0",
+            "nodeType": "StructDefinition",
+            "scope": 21,
+            "src": "227:111:0",
+            "visibility": "public"
+          },
+          {
+            "canonicalName": "DataStructures.Request",
+            "id": 20,
+            "members": [
+              {
+                "constant": false,
+                "id": 13,
+                "mutability": "mutable",
+                "name": "requester",
+                "nameLocation": "378:9:0",
+                "nodeType": "VariableDeclaration",
+                "scope": 20,
+                "src": "370:17:0",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 12,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "370:7:0",
+                  "stateMutability": "nonpayable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 15,
+                "mutability": "mutable",
+                "name": "key",
+                "nameLocation": "404:3:0",
+                "nodeType": "VariableDeclaration",
+                "scope": 20,
+                "src": "398:9:0",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_bytes_storage_ptr",
+                  "typeString": "bytes"
+                },
+                "typeName": {
+                  "id": 14,
+                  "name": "bytes",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "398:5:0",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_storage_ptr",
+                    "typeString": "bytes"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 17,
+                "mutability": "mutable",
+                "name": "requestDate",
+                "nameLocation": "423:11:0",
+                "nodeType": "VariableDeclaration",
+                "scope": 20,
+                "src": "418:16:0",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 16,
+                  "name": "uint",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "418:4:0",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 19,
+                "mutability": "mutable",
+                "name": "accepted",
+                "nameLocation": "450:8:0",
+                "nodeType": "VariableDeclaration",
+                "scope": 20,
+                "src": "445:13:0",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_bool",
+                  "typeString": "bool"
+                },
+                "typeName": {
+                  "id": 18,
+                  "name": "bool",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "445:4:0",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "name": "Request",
+            "nameLocation": "351:7:0",
+            "nodeType": "StructDefinition",
+            "scope": 21,
+            "src": "344:122:0",
+            "visibility": "public"
+          }
+        ],
+        "scope": 22,
+        "src": "196:273:0",
+        "usedErrors": []
+      }
+    ],
+    "src": "35:436:0"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.8.17+commit.8df45f5f.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.4.11",
+  "updatedAt": "2023-04-05T23:09:07.930Z",
+  "devdoc": {
+    "custom:dev-run-script": "./scripts/deploy_with_ethers.ts",
+    "details": "Custom data structures.",
+    "kind": "dev",
+    "methods": {},
+    "title": "DataStructures",
+    "version": 1
+  },
+  "userdoc": {
+    "kind": "user",
+    "methods": {},
+    "version": 1
+  }
+}
