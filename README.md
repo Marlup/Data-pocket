@@ -1,2 +1,2 @@
 # Data-pocket
-Smart contracts application to store encrypted personal data of small size at blockchain
+Smart contracts application to store small, encrypted personal data at blockchain
